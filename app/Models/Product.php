@@ -11,6 +11,19 @@ class Product extends Model
 
     protected $fillable = [
         'name',
-        'price'
+        'price',
+        'category',
+        'stock',
+        'image',
     ];
+
+    protected $keyType = 'string';
+    public $incrementing = false;
+
+    protected $appends = ['id'];
+
+    public function getIdAttribute($value = null)
+    {
+        return (string) $this->getAttribute('_id');
+    }
 }

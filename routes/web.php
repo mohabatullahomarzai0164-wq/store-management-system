@@ -1,18 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Product;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::get('/test', function () {
-
-    Product::create([
-        'name' => 'Test Phone',
-        'price' => 500
-    ]);
-
-    return Product::all();
+Route::prefix('products')->group(function () {
+    Route::get('/data', [ProductController::class, 'data']);
 });
+
+Route::resource('products', ProductController::class);
